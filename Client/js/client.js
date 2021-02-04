@@ -7,15 +7,15 @@ form.addEventListener('submit' , (event) => {
     const formData = new FormData(form);
     const name = formData.get('name');
     const caption = formData.get('caption');
-    const memeurl = formData.get('memeurl');
+    const url = formData.get('memeurl');
     const xmeme = {
         name,
-        caption,
-        memeurl
+        url,
+        caption
     };
-    console.log(xmeme);
+    // console.log(xmeme);
 
-    fetch('http://localhost:5000/xmeme', {
+    fetch('http://localhost:5000/memes', {
         method: 'POST',
         body: JSON.stringify(xmeme) ,
         headers: {
@@ -29,9 +29,9 @@ form.addEventListener('submit' , (event) => {
     //getAllXMemes();
 } )
 
-
+getAllXMemes();
 function getAllXMemes(){
-    fetch('http://localhost:5000')
+    fetch('http://localhost:5000/memes/1000')
         .then(res => res.json())
         .then(meme => console.log(meme))
         .catch(err => console.log(err))
