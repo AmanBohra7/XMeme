@@ -8,15 +8,29 @@
      <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <h1>XMeme</h1>
     <form action="" class="memeform">
-        <label for="name">Meme Owner::</label>
+        <label for="name">Meme Owner</label>
         <input type="text" class="u-full-width" name="name" id="name">
         <label for="caption">Caption</label>
         <input type="text" class="u-full-width" name="caption" id="caption">
-        <label for="memeurl">Meme Url</label>
-        <input type="text" class="u-full-width" name="memeurl" id="memeurl">
-        <button class="primary-button">Submit Meme</button>
+        <label for="url">Meme Url</label>
+        <div class="row">
+            <div class="eight columns"><input type="text" class="u-full-width" name="url" id="url"></div>
+            <div class="four columns"><button class="button-primary">Submit Meme</button></div>
+        </div>
     </form>
+    <button class="button-primary" id="get-memes">GET</button>
+    <div id="meme-collection">
+        <!-- <div class="memei">
+            <h4>Name</h4>
+            <p>This is his caption</p>
+            <img src="https://i.pinimg.com/564x/b6/c0/2a/b6c02a4ad5b3538c4efb6aa194b432a8.jpg" alt="" srcset="">
+            <hr>
+        </div> -->
+        
+        
+    </div>
     <script src="js/client.js"></script>
 </body>
 </html>

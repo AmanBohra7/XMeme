@@ -1,4 +1,27 @@
-.memeform{
+.memeform , h1 , #meme-collection{
     width: 50%;
     margin: 0 auto;
+}
+
+.memeform{
+    margin-bottom: 60px;
+}
+
+h1{
+    text-align: center;
+}
+
+#get-memes{
+    font-weight: bold;
+}
+
+.memei{
+    padding: 0px;
+    line-height: 0px;
+    /* background: #000; */
+}
+
+img{
+    border-radius: 10px;
+    width: 200px;
 }
