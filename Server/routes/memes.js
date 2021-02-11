@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 let router = express.Router();
 let Meme = require('../models/meme.model')
 
+// function for validation that is there any empty field send by the user or not
 function isValidContent(memecontent){
     return memecontent.name && memecontent.name.toString().trim() !== ''
         && memecontent.url && memecontent.url.toString().trim() !== ''
@@ -11,7 +12,8 @@ function isValidContent(memecontent){
 
 
 router.get('/',(req,res)=>{
-        Meme.find().limit(100)
+
+    Meme.find().limit(100)
         .then(memes => {
             let newObject = new Array();
             memes.map( (m) => {
@@ -28,32 +30,47 @@ router.get('/',(req,res)=>{
             res.status(200).json(newObject);
         })
         .catch(err => res.status(422).send(err))
+
     })
     
 router.post('/',(req,res)=>{
-        const xmeme = new Meme({
-            _id: new mongoose.Types.ObjectId(),
-            name: req.body.name,
-            url: req.body.url,
-            caption: req.body.caption
-        })
-        xmeme.save()
-            .then( result => {
-                // console.log(result);
-                res.json({
-                    id: xmeme._id
-                })
-            } )
-            .catch( err => {
-                console.log(err);
-                res.status(400).send({
-                    err: err
-                })
-            } );
-       
+
+    console.log(req.body.name);
+
+    if(!isValidContent(req.body)) return res.status(422).send({
+        "Message":"Empty field not allowed!"
     })
 
+    Meme.exists({name:req.body.name},function(err,ret){
+        if(err) return console.log(err);
+        else
+            if(ret) return res.status(409).send({
+                "Message":"Name already used!"
+            })
+            const xmeme = new Meme({
+                _id: new mongoose.Types.ObjectId(),
+                name: req.body.name,
+                url: req.body.url,
+                caption: req.body.caption
+            })
+            xmeme.save()
+                .then( result => {
+                    // console.log(result);
+                    res.json({
+                        id: xmeme._id
+                    })
+                } )
+                .catch( err => {
+                    console.log(err);
+                    res.status(400).send({
+                        err: err
+                    })
+                });
+        })
+}) // end router.POST
+
 router.get('/:id',(req,res)=>{
+
     Meme.find({_id:req.params.id})
         .then(content => {
             res.send({
@@ -64,9 +81,11 @@ router.get('/:id',(req,res)=>{
             })
         })
         .catch(err => res.status(404).send(err));
-})
+
+}) // end router.get('/:id')
 
 router.patch('/:id',(req,res)=>{
+
     Meme.findByIdAndUpdate(req.params.id,req.body,
         function(err,docs){
             if(err) res.status(404);
@@ -78,8 +97,7 @@ router.patch('/:id',(req,res)=>{
                 }
             }
         })
-
-})
+}) // rotuter.Patch()
 
 
 module.exports = router;

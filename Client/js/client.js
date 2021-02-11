@@ -3,6 +3,8 @@ const API_URL = 'http://localhost:5000/memes';
 const form = document.querySelector('form');
 const memeCollection = document.getElementById("meme-collection");
 
+getAllXMemes();
+
 document.getElementById("get-memes").addEventListener("click",function(){
     changeMemeData();
     console.log("check");
@@ -81,10 +83,10 @@ function getMemeByID(){
 
 
 function changeMemeData(){
-    const id = "6024f7758fcbd63d08eeef9d";
+    const id = "601d9c8bcdbf823e40dae829";
     var changeInData = {
-        name: "ashok kumar singh",
-        caption: "I have changed my caption for now!"
+        name: "Aman Bohra",
+        caption: "This is my meme!! YEAH"
     };
     
     fetch(API_URL+"/"+id,{

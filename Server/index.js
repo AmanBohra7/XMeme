@@ -1,4 +1,8 @@
 const express = require('express');
+
+const ip = require('ip');
+const ipAddress = ip.address();
+
 const cors = require('cors');
 const mongoose = require('mongoose');
 const memes = require('./routes/memes');
@@ -19,5 +23,6 @@ connection.once('open',()=>{
 })
 
 app.listen(5000,()=>{
-    console.log('Listening on https://localhost:5000/memes')
+    console.log('Listening on https://localhost:5000/memes');
+    console.log(`Network access via: ${ipAddress}!`);
 })
