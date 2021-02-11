@@ -4,7 +4,8 @@ const form = document.querySelector('form');
 const memeCollection = document.getElementById("meme-collection");
 
 document.getElementById("get-memes").addEventListener("click",function(){
-    getAllXMemes();
+    changeMemeData();
+    console.log("check");
 })
 
 let memesRecieved = new Array();
@@ -43,7 +44,7 @@ function getAllXMemes(){
     fetch(API_URL)
         .then(res => res.json())
         .then(memes => {
-            // console.log(memes);
+            console.log(memes);
             memes.map( (meme) => {
                 var memei = document.createElement("div");
                 memei.className = "memei";
@@ -67,4 +68,33 @@ function getAllXMemes(){
             } )
         })
         .catch(err => console.log(err))
+}
+
+function getMemeByID(){
+    const id = "601d9c8bcdbf823e40dae829";
+    // console.log(API_URL+"/"+id)
+    fetch(API_URL+"/"+id)
+        .then(res => res.json())
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+}
+
+
+function changeMemeData(){
+    const id = "6024f7758fcbd63d08eeef9d";
+    var changeInData = {
+        name: "ashok kumar singh",
+        caption: "I have changed my caption for now!"
+    };
+    
+    fetch(API_URL+"/"+id,{
+        method: 'PATCH',
+        body: JSON.stringify(changeInData),
+        headers:{"Content-type":"application/json"}
+    })
+        .then(
+            res => res.json()
+            )
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
 }

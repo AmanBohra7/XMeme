@@ -55,8 +55,30 @@ router.post('/',(req,res)=>{
 
 router.get('/:id',(req,res)=>{
     Meme.find({_id:req.params.id})
-        .then(content => res.send(content[0]))
-        .catch(err => res.send(err));
+        .then(content => {
+            res.send({
+                id: content[0].id,
+                name: content[0].name,
+                url: content[0].url,
+                caption: content[0].caption
+            })
+        })
+        .catch(err => res.status(404).send(err));
+})
+
+router.patch('/:id',(req,res)=>{
+    Meme.findByIdAndUpdate(req.params.id,req.body,
+        function(err,docs){
+            if(err) res.status(404);
+            else {
+                if(docs === null)  res.status(404).send();
+                else{
+                    res.status(200).send(docs);
+                    console.log(docs)
+                }
+            }
+        })
+
 })
 
 

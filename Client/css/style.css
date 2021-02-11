@@ -11,10 +11,6 @@ h1{
     text-align: center;
 }
 
-#get-memes{
-    font-weight: bold;
-}
-
 .memei{
     padding: 0px;
     line-height: 0px;
@@ -23,5 +19,6 @@ h1{
 
 img{
     border-radius: 10px;
-    width: 200px;
+    height: 200px;
+    width: 100%;
 }
