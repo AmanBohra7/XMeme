@@ -1,8 +1,6 @@
 const express = require('express');
-
-const ip = require('ip');
-const ipAddress = ip.address();
-
+const swaggerUI = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const memes = require('./routes/memes');
@@ -10,7 +8,9 @@ const memes = require('./routes/memes');
 require('dotenv').config();
 
 const app = express();
+const swaggerApp = express();
 
+swaggerApp.use(cors());
 app.use(cors()); 
 app.use(express.json())
 app.use('/memes',memes);
@@ -24,6 +24,11 @@ connection.once('open',()=>{
 })
 
 app.listen(8081,()=>{
-    console.log('Listening on https://localhost:5000/memes');
-    console.log(`Network access via: ${ipAddress}!`);
+    console.log('Listening on https://localhost:8081/memes');
+})
+
+swaggerApp.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
+swaggerApp.listen(8080,()=>{
+    console.log('Listening on https://server_ip:8080/api-docs');
 })

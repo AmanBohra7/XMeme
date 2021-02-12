@@ -1,14 +1,17 @@
 console.log("Hello Memer!!!....")
+
+// craeting required variables 
 const API_URL = 'http://localhost:8081/memes';
 const form = document.getElementById('memeform');
 const getform = document.getElementById('getform');
 const editform = document.getElementById('editform');
 const memeCollection = document.getElementById("meme-collection");
 
+// calling function to fetch and display all memes in starting webpage
 getAllXMemes();
 
-// let memesRecieved = new Array();
-
+// event listener for the meme creating form
+// also uses fetch POST req at /memes to server which in ret. add meme content in the database
 form.addEventListener('submit' , (event) => {
     event.preventDefault();
     const formData = new FormData(form);
@@ -37,6 +40,7 @@ form.addEventListener('submit' , (event) => {
         .catch(err => console.log(err))
 })
 
+// event listener for getting existing meme by id form
 getform.addEventListener('submit' , (event) => {
     event.preventDefault();
     const getFormData = new FormData(getform);
@@ -45,7 +49,7 @@ getform.addEventListener('submit' , (event) => {
     getform.reset();
 })
 
-
+//  event listener for updating meme by provided id from 'getform' form
 editform.addEventListener('submit' , (event) => {
     event.preventDefault();
     const getFormData = new FormData(getform);
@@ -69,6 +73,7 @@ editform.addEventListener('submit' , (event) => {
     createOutputDiv("Updated!");
 })
 
+//  function to create child div elements for the main container to display all received memes in a formated way
 function createMemeDiv(single_meme){
     var memei = document.createElement("div");
     memei.className = "memei";
@@ -90,6 +95,7 @@ function createMemeDiv(single_meme){
     memeCollection.appendChild(memei);   
 }
 
+// function to create different div elemetns other then memes for showing Undefiend and Udpated messages
 function createOutputDiv(output){
     var memei = document.createElement("div");
     var header = document.createElement("h4");
@@ -98,6 +104,7 @@ function createOutputDiv(output){
     memeCollection.appendChild(memei);
 }
 
+//  function uses fetch GET req at /memes function to receive all memes from the server (limit 100 set at server end!)
 function getAllXMemes(){
     memeCollection.innerHTML = '';
     fetch(API_URL)
@@ -111,6 +118,7 @@ function getAllXMemes(){
         .catch(err => console.log(err))
 }
 
+// function uses fetch GET req at /memes/:id for fetching especific meme content with provided ID
 function getMemeByID(id){
     memeCollection.innerHTML = '';
     fetch(API_URL+"/"+id)
@@ -125,7 +133,7 @@ function getMemeByID(id){
         .catch(err => console.log(err));
 }
 
-
+// function uses fetch PATCH req at /memes/:id to update caption/url of provided user ID 
 function changeMemeData(changedData,id){
     fetch(API_URL+"/"+id,{
         method: 'PATCH',

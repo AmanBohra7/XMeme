@@ -9,7 +9,8 @@
 </head>
 <body>
     <h1>XMeme</h1>
-    
+
+    <!-- Form for creating a new MEME! POST request -->
     <form action="" id="memeform" class="forms">
         <label for="name">Meme Owner</label>
         <input type="text" class="u-full-width" name="name" id="name">
@@ -20,16 +21,20 @@
             <div class="eight columns"><input type="text" class="u-full-width" name="url" id="url"></div>
             <div class="four columns"><button class="button-primary">Submit Meme</button></div>
         </div>
+        <hr>
     </form>
+
+    <!-- Form for getting a existing Meme by GET request -->
     <form action="" id="getform" class="forms">
         <label for="userid">User ID:</label>
         <div class="row">
             <div class="eight columns"><input type="text" class="u-full-width" name="userid" id="userid" 
-                placeholder="Requried! Get/Update memes"></div>
+                placeholder="required! Get/Update memes"></div>
             <div class="four columns"><button class="button-primary">Get Meme</button></div>
         </div>
-        <!-- <button class="button-primary" id="get-memes">GET</button> -->
     </form>
+
+    <!-- Subpart of above form to edit memes with the provided ID using PATCH request -->
     <form action="" id="editform" class="forms">
         <label for="newcaption">New Caption:</label>
         <div class="row">
@@ -40,11 +45,14 @@
             <div class="eight columns"><input type="text" class="u-full-width" name="newurl" id="newurl"></div>
             <div class="four columns"><button class="button-primary">Update Meme</button></div>
         </div>
-        <!-- <button class="button-primary" id="get-memes">GET</button> -->
-    </form>
+        <hr>
+    </form> 
     
+    <!-- Container which will dynmically load all the memems from the server and conver it into html tags as child of meme-collection -->
     <div id="meme-collection">
     </div>
+
     <script src="js/client.js"></script>
+
 </body>
 </html>
