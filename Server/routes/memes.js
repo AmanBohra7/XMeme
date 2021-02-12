@@ -10,7 +10,6 @@ function isValidContent(memecontent){
         && memecontent.caption && memecontent.caption.toString().trim() !== ''
 }
 
-
 router.get('/',(req,res)=>{
 
     Meme.find().limit(100)
@@ -41,10 +40,10 @@ router.post('/',(req,res)=>{
         "Message":"Empty field not allowed!"
     })
 
-    Meme.exists({name:req.body.name},function(err,ret){
+    Meme.exists({name:req.body.name},function(err,doc){
         if(err) return console.log(err);
         else
-            if(ret) return res.status(409).send({
+            if(doc) return res.status(409).send({
                 "Message":"Name already used!"
             })
             const xmeme = new Meme({
@@ -73,6 +72,12 @@ router.get('/:id',(req,res)=>{
 
     Meme.find({_id:req.params.id})
         .then(content => {
+            if(content.length === 0) {
+                console.log(content);
+                return res.status(404).send({
+                    "message":"No content of this ID!"
+                });
+            }
             res.send({
                 id: content[0].id,
                 name: content[0].name,
@@ -80,7 +85,7 @@ router.get('/:id',(req,res)=>{
                 caption: content[0].caption
             })
         })
-        .catch(err => res.status(404).send(err));
+        .catch(err => res.status(500).send(err));
 
 }) // end router.get('/:id')
 
@@ -88,13 +93,12 @@ router.patch('/:id',(req,res)=>{
 
     Meme.findByIdAndUpdate(req.params.id,req.body,
         function(err,docs){
-            if(err) res.status(404);
+            if(err) res.status(404).send({"Message":"Content not found!"});
             else {
-                if(docs === null)  res.status(404).send();
-                else{
-                    res.status(200).send(docs);
-                    console.log(docs)
-                }
+                    res.status(200).send({
+                        "Message":"Content Updated!"
+                    })
+                    console.log(docs);
             }
         })
 }) // rotuter.Patch()

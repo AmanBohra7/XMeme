@@ -1,5 +1,5 @@
 console.log("Hello Memer!!!....")
-const API_URL = 'http://localhost:5000/memes';
+const API_URL = 'http://localhost:8081/memes';
 const form = document.getElementById('memeform');
 const getform = document.getElementById('getform');
 const editform = document.getElementById('editform');
@@ -7,8 +7,7 @@ const memeCollection = document.getElementById("meme-collection");
 
 getAllXMemes();
 
-
-let memesRecieved = new Array();
+// let memesRecieved = new Array();
 
 form.addEventListener('submit' , (event) => {
     event.preventDefault();
@@ -58,10 +57,10 @@ editform.addEventListener('submit' , (event) => {
         }) 
     } 
     const editFormData = new FormData(editform);
-    const newname = editFormData.get('newname');
+    const newurl = editFormData.get('newurl');
     const newcaption = editFormData.get('newcaption');
     const changeinData = {
-        name: newname,
+        url: newurl,
         caption: newcaption
     }
     changeMemeData(changeinData,userid);
@@ -104,7 +103,7 @@ function getAllXMemes(){
     fetch(API_URL)
         .then(res => res.json())
         .then(memes => {
-            // console.log(memes);
+            console.log(memes);
             memes.map( (meme) => {
                 createMemeDiv(meme);
             } )
@@ -117,6 +116,7 @@ function getMemeByID(id){
     fetch(API_URL+"/"+id)
         .then(res => res.json())
         .then(ret_meme => {
+            console.log(ret_meme);
             if(Object.keys(ret_meme).length)
                 createMemeDiv(ret_meme);
             else
