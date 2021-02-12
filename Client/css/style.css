@@ -1,10 +1,10 @@
-.memeform , h1 , #meme-collection{
+#memeform , h1 , #meme-collection  , #editform , .forms{
     width: 50%;
     margin: 0 auto;
 }
 
-.memeform{
-    margin-bottom: 60px;
+#memeform , #editform {
+    margin-bottom: 50px;
 }
 
 h1{

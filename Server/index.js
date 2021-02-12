@@ -15,7 +15,8 @@ app.use(cors());
 app.use(express.json())
 app.use('/memes',memes);
 
-const uri = process.env.ATLAS_URI;
+// const uri = process.env.ATLAS_URI;
+const uri = 'mongodb://localhost:27017/memes'
 mongoose.connect(uri,{useNewUrlParser:true,useCreateIndex:true,useUnifiedTopology:true,useFindAndModify:false})
 const connection = mongoose.connection;
 connection.once('open',()=>{
