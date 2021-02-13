@@ -31,11 +31,13 @@ form.addEventListener('submit' , (event) => {
             'Content-Type': 'application/json'
         }
     } )
-        .then(res => res.json())
+        .then(res => {
+            if(res.status == 200) getAllXMemes();
+            res.json();
+        })
         .then(res => {
             console.log(res);
             form.reset();
-            getAllXMemes();
         })
         .catch(err => console.log(err))
 })
@@ -87,7 +89,7 @@ function createMemeDiv(single_meme){
     memei.appendChild(para);
 
     var image = document.createElement("img");
-    image.src ="https://i.pinimg.com/564x/b6/c0/2a/b6c02a4ad5b3538c4efb6aa194b432a8.jpg";
+    image.src = single_meme.url;
     memei.appendChild(image);
 
     memei.appendChild(document.createElement("hr"))

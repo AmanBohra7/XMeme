@@ -1,7 +1,0 @@
-[x] creating 3 end points
-[x] POST /memes
-[x] GET /memes
-[x] GET /memes/id
-[x] Adding mongoDB
-
-ATLAS_URI=mongodb+srv://amanbohra:1234@cluster0.mr0ug.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority

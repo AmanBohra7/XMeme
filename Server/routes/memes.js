@@ -34,8 +34,6 @@ router.get('/',(req,res)=>{
     
 router.post('/',(req,res)=>{
 
-    console.log(req.body.name);
-
     if(!isValidContent(req.body)) return res.status(422).send({
         "Message":"Empty field not allowed!"
     })
