@@ -32,8 +32,8 @@ app.listen(8081,()=>{
     console.log('Listening on https://localhost:8081/memes');
 })
 
-swaggerApp.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+swaggerApp.use('/swagger-ui', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 swaggerApp.listen(8080,()=>{
-    console.log('Listening on https://server_ip:8080/api-docs');
+    console.log('Listening on https://server_ip:8080/swagger-ui');
 })
