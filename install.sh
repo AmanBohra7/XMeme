@@ -1,11 +1,10 @@
 
-cd Server/
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 
 . ~/.nvm/nvm.sh
 
-sudo nvm install -y node
+nvm install -y node
 
 curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
 
@@ -14,6 +13,8 @@ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongod
 sudo apt update -y
 
 sudo apt install -y  mongodb-org
+
+cd Server/
 
 npm install -y
 
