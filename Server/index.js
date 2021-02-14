@@ -19,7 +19,7 @@ app.use('/memes',memes);
 let uri;
 if(process.env.NODE_ENV === "development")
     uri = 'mongodb://localhost:27017/memes'
-else
+else    
     uri = process.env.ATLAS_URI ;
 
 mongoose.connect(uri,{useNewUrlParser:true,useCreateIndex:true,useUnifiedTopology:true,useFindAndModify:false})
